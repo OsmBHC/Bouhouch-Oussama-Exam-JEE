@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Clients</h2>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search clients..." [(ngModel)]="searchKeyword" (input)="searchClients()">
+        <button class="btn btn-outline-secondary" type="button" (click)="searchClients()">Search</button>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{ client.id ?? 'N/A' }}</td>
+          <td>{{ client.name }}</td>
+          <td>{{ client.email }}</td>
+          <td>
+            <a *ngIf="client.id !== undefined" [routerLink]="['/credits', client.id]" class="btn btn-sm btn-info">View Credits</a>
+            <button *ngIf="client.id !== undefined" class="btn btn-sm btn-danger ms-2" (click)="deleteClient(client.id)">Delete</button>
+            <span *ngIf="client.id === undefined" class="text-muted">No actions available</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

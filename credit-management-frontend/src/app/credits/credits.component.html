@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2 class="mb-4">{{ clientId !== null ? 'Credits for Client #' + clientId : 'All Credits' }}</h2>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Client ID</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Interest Rate</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let credit of credits">
+          <td>{{ credit.id ?? 'N/A' }}</td>
+          <td>{{ credit.clientId }}</td>
+          <td>{{ credit.amount | currency }}</td>
+          <td>{{ credit.status }}</td>
+          <td>{{ credit.interestRate | percent }}</td>
+          <td>
+            <button *ngIf="credit.id !== undefined" class="btn btn-sm btn-danger" (click)="deleteCredit(credit.id)">Delete</button>
+            <span *ngIf="credit.id === undefined" class="text-muted">No actions available</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
