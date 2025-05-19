@@ -8,7 +8,7 @@ import java.util.Date;
 public class CreditDTO {
     private Long id;
     private Date requestDate;
-    private String status; // Représentation sous forme de String de l'enum CreditStatus
+    private String status;
     private Date acceptationDate;
     private double amount;
     private Integer duration;
