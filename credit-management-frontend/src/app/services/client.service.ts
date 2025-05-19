@@ -16,7 +16,7 @@ export class ClientService {
   }
 
   public searchClients(keyword: string): Observable<Array<ClientDTO>> {
-    return this.http.get<Array<ClientDTO>>(environment.backendHost + "/clients/search?keyword=" + keyword);
+    return this.http.get<Array<ClientDTO>>(environment.backendHost + "/clients?keyword=" + keyword);
   }
 
   public saveClient(client: ClientDTO): Observable<ClientDTO> {

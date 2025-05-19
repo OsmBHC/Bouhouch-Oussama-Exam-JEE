@@ -15,6 +15,7 @@ import { ClientService } from '../services/client.service';
 export class ClientsComponent implements OnInit {
   clients: ClientDTO[] = [];
   searchKeyword: string = '';
+  errorMessage: string | null = null;
 
   constructor(private clientService: ClientService) {}
 
@@ -23,17 +24,25 @@ export class ClientsComponent implements OnInit {
   }
 
   loadClients(): void {
+    this.errorMessage = null;
     this.clientService.getClients().subscribe({
       next: (clients) => this.clients = clients,
-      error: (err) => console.error('Error loading clients:', err)
+      error: (err) => {
+        console.error('Error loading clients:', err);
+        this.errorMessage = 'Failed to load clients. Please try again later.';
+      }
     });
   }
 
   searchClients(): void {
+    this.errorMessage = null;
     if (this.searchKeyword.trim()) {
       this.clientService.searchClients(this.searchKeyword).subscribe({
         next: (clients) => this.clients = clients,
-        error: (err) => console.error('Error searching clients:', err)
+        error: (err) => {
+          console.error('Error searching clients:', err);
+          this.errorMessage = 'Failed to search clients. Please try again later.';
+        }
       });
     } else {
       this.loadClients();
@@ -52,7 +61,10 @@ export class ClientsComponent implements OnInit {
           this.clients = this.clients.filter(client => client.id !== id);
           alert('Client deleted successfully.');
         },
-        error: (err) => console.error('Error deleting client:', err)
+        error: (err) => {
+          console.error('Error deleting client:', err);
+          this.errorMessage = 'Failed to delete client. Please try again later.';
+        }
       });
     }
   }

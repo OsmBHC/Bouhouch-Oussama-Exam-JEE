@@ -18,7 +18,10 @@ public class ClientRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ClientDTO>> getAllClients() {
+    public ResponseEntity<List<ClientDTO>> getAllClients(@RequestParam(value = "keyword", required = false) String keyword) {
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            return ResponseEntity.ok(clientService.searchClients(keyword));
+        }
         return ResponseEntity.ok(clientService.findAll());
     }
 

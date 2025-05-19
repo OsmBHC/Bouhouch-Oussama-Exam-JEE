@@ -1,6 +1,7 @@
 package ma.enset.oussama.bouhouch.creditmanagementbackend.services;
 
 import ma.enset.oussama.bouhouch.creditmanagementbackend.dtos.ClientDTO;
+
 import java.util.List;
 
 public interface ClientService {
@@ -9,4 +10,5 @@ public interface ClientService {
     ClientDTO create(ClientDTO clientDTO);
     ClientDTO update(Long id, ClientDTO clientDTO);
     void delete(Long id);
+    List<ClientDTO> searchClients(String keyword);
 }
